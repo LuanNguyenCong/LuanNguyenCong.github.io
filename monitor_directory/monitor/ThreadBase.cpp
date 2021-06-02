@@ -7,11 +7,12 @@ ThreadBase::ThreadBase()
 
 ThreadBase::~ThreadBase()
 {
-	
+	if (started) join();
 }
 
 void ThreadBase::start()
 {
+	if (started) return;
 	myThread = thread(&ThreadBase::run, this);
 	started = true;
 }
@@ -23,5 +24,6 @@ void ThreadBase::run()
 
 void ThreadBase::join()
 {
-	myThread.join();
+	if (started) myThread.join();
+	started = false;
 }

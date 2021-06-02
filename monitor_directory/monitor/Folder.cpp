@@ -9,6 +9,7 @@ Folder::~Folder()
 {
 }
 
+
 const char* Folder::getPath()
 {
     return path;

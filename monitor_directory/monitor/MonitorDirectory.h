@@ -2,6 +2,7 @@
 #define MONITOR_DIRECTORY_H
 
 #include <vector>
+#include <mutex>
 #include <sys/statvfs.h>
 #include <sys/types.h>
 #include <iostream>
@@ -9,6 +10,7 @@
 #include "Folder.h"
 #include "Disk.h"
 #include "ThreadBase.h"
+#include "../rbitmq/RabbitmqHelper.h"
 
 class MonitorDirectory : public ThreadBase
 {
@@ -16,11 +18,17 @@ private:
     /* data */
     MonitorDirectory();
     static MonitorDirectory* instance;
+    static mutex myMutex;
+
+    int timeMonitor;
+    int warningThreshold_1, warningThreshold_2, warningThreshold_3;
 
     // Danh sach o cung
     std::vector<Disk> disks;
     // Danh sach thu muc goc
     std::vector<Folder> orignalFolders;
+
+    int percentToThreshold(int percent);
 
 public:
     MonitorDirectory(const MonitorDirectory&) = delete;
@@ -49,7 +57,7 @@ public:
     // Tra ve chu cua cac duong dan
     std::vector<char*> getOwner();
 
-    //  Luong thuc hien viec giam sat
+    // Luong thuc hien viec giam sat
     void run();
 
 };

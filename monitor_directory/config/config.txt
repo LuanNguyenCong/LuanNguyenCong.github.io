@@ -1,0 +1,12 @@
+# Rabbitmq param
+Exchange = monitory Exchange
+Routekey = monitory Routekey
+Queue = monitory Queue
+
+# Monitory param
+Time monitory = 10              # Don vi: giay
+Warning threshold 1 = 70        # Don vi: %
+Warning threshold 2 = 80        # Don vi: %
+Warning threshold 3 = 90        # Don vi: %
+Delete start threshold = 80     # Don vi: %
+Delete stop threshold = 60      # Don vi: %
